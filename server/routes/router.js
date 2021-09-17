@@ -4,6 +4,14 @@ import { v4 as uuidv4 } from 'uuid';
 import jwt from 'jsonwebtoken';
 import db from '../config/database.js';
 import { validateRegister, isLoggedIn } from '../middleware/users.js';
+import {
+  createCategory,
+  deleteCategory,
+  showCategory,
+  showCategoryById,
+  showSubCategory,
+  updateCategory,
+} from '../controllers/categories.js';
 
 const router = express.Router();
 
@@ -109,5 +117,17 @@ router.get('/secret-route', isLoggedIn, (req, res, next) => {
   console.log(req.userData);
   res.send('This is the secret content. Only logged in users can see that!');
 });
+
+router.get('/categories', showCategory);
+
+router.get('/subcategories', showSubCategory);
+
+router.get('/categories/:id', showCategoryById);
+
+router.post('/categories', createCategory);
+
+router.put('/categories/:id', updateCategory);
+
+router.delete('/categories/:id', deleteCategory);
 
 export default router;

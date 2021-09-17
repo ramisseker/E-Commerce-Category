@@ -33,6 +33,17 @@ export const getSubCategories = (id, result) => {
   });
 };
 
+export const getSubCategoryById = (id, result) => {
+  db.query('SELECT * FROM subcategories WHERE id = ?', [id], (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results[0]);
+    }
+  });
+};
+
 export const insertCategory = (data, result) => {
   db.query('INSERT INTO categories SET ?', [data], (err, results) => {
     if (err) {

@@ -6,6 +6,7 @@ import {
   insertCategory,
   editCategoriesById,
   deleteCategoriesById,
+  getSubCategoryById,
 } from '../models/categoryModel.js';
 
 // Get All Products
@@ -32,6 +33,16 @@ export const showCategoryById = (req, res) => {
 
 export const showSubCategory = (req, res) => {
   getSubCategories((err, results) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(results);
+    }
+  });
+};
+
+export const showSubCategoryById = (req, res) => {
+  getSubCategoryById(req.params.id, (err, results) => {
     if (err) {
       res.send(err);
     } else {
