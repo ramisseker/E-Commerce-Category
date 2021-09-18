@@ -48,6 +48,32 @@ export const getSubCategoryById = (id, result) => {
   );
 };
 
+export const getSubCategories2 = (result) => {
+  db.query('SELECT * FROM subcategories2', (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results);
+    }
+  });
+};
+
+export const getSubCategoryById2 = (id, result) => {
+  db.query(
+    'SELECT * FROM subcategories2 WHERE subcat_id = ?',
+    [id],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        result(err, null);
+      } else {
+        result(null, results);
+      }
+    }
+  );
+};
+
 export const insertCategory = (data, result) => {
   db.query('INSERT INTO categories SET ?', [data], (err, results) => {
     if (err) {
@@ -63,6 +89,23 @@ export const insertSubCategory = (data, result) => {
   db.query(
     'INSERT INTO subcategories (subcatname, category_id) VALUES (?,?)',
     [data.subcatname, data.category_id],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        result(err, null);
+      } else {
+        result(null, results);
+      }
+    }
+  );
+};
+
+export const insertSubCategory2 = (data, result) => {
+  console.log('data');
+  console.log(data);
+  db.query(
+    'INSERT INTO subcategories2 (subcatname2, subcat_id) VALUES (?,?)',
+    [data.subcatname2, data.subcat_id],
     (err, results) => {
       if (err) {
         console.log(err);
@@ -98,19 +141,4 @@ export const deleteCategoriesById = (id, result) => {
       result(null, results);
     }
   });
-};
-
-export const getSubCategoriesById = (id, result) => {
-  db.query(
-    'SELECT * FROM subcategories  WHERE  category_id = ? ',
-    [id],
-    (err, results) => {
-      if (err) {
-        console.log(err);
-        result(err, null);
-      } else {
-        result(null, results[0]);
-      }
-    }
-  );
 };

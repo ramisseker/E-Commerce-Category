@@ -13,6 +13,9 @@ import {
   showSubCategory,
   showSubCategoryById,
   updateCategory,
+  showSubCategory2,
+  showSubCategoryById2,
+  createSubCategory2,
 } from '../controllers/categories.js';
 
 const router = express.Router();
@@ -124,13 +127,19 @@ router.get('/categories', showCategory);
 
 router.get('/subcategories', showSubCategory);
 
+router.get('/subcategories2', showSubCategory2);
+
 router.get('/categories/:id', showCategoryById);
 
 router.get('/subcategories/:id', showSubCategoryById);
 
+router.get('/subcategories2/:id', showSubCategoryById2);
+
 router.post('/categories', createCategory);
 
 router.post('/subcategories', createSubCategory);
+
+router.post('/subcategories2', createSubCategory2);
 
 router.put('/categories/:id', updateCategory);
 

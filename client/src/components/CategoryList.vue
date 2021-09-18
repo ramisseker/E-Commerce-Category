@@ -55,7 +55,12 @@
         </div>
         <div class="categories">
           <ul>
-            <li class="listitems is-12" v-for="item in subItems" :key="item.id">
+            <li
+              class="listitems is-12"
+              v-for="item in subItems"
+              :key="item.id"
+              @click="subCategoriesById2(item.id)"
+            >
               {{ item.subcatname }}
             </li>
           </ul>
@@ -70,20 +75,25 @@
             <h1>Categories</h1>
           </div>
           <div>
+            <input
+              class="mr-3"
+              type="text"
+              placeholder="Sub Category Name"
+              v-model="subCategoryName2"
+            />
             <button>Edit</button>
             <button>Delete</button>
-            <button>Add</button>
+            <button v-on:click="saveSubCategory2">Add</button>
           </div>
         </div>
         <div class="categories">
           <ul id="example-1">
             <li
               class="listitems is-12"
-              v-for="item in items"
-              :key="item.message"
-              @click="basildi"
+              v-for="item in subItems2"
+              :key="item.id"
             >
-              {{ item.message }}
+              {{ item.subcatname2 }}
             </li>
           </ul>
         </div>
@@ -161,8 +171,11 @@ export default {
       categoryName: '',
       subCategoryName: '',
       category_id: '',
+      subCategoryName2: '',
+      subcat_id: '',
       items: [],
       subItems: [],
+      subItems2: [],
     };
   },
 
@@ -203,15 +216,39 @@ export default {
         console.log(err);
       }
     },
+    async subCategoriesById2(id) {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/api/subcategories2/${id}`
+        );
+        this.subItems2 = response.data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
     async saveSubCategory() {
       try {
         await axios.post('http://localhost:3000/api/subcategories', {
           subcatname: this.subCategoryName,
           category_id: this.subItems[0].category_id,
         });
-
         this.subCategoryName = '';
         this.category_id = '';
+        this.$router.push('/');
+        alert('item eklendi.');
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    async saveSubCategory2() {
+      try {
+        await axios.post('http://localhost:3000/api/subcategories2', {
+          subcatname2: this.subCategoryName2,
+          subcat_id: this.subItems2[0].subcat_id,
+        });
+        this.subCategoryName2 = '';
+        this.subcat_id = '';
         this.$router.push('/');
         alert('item eklendi.');
       } catch (err) {

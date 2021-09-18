@@ -8,6 +8,9 @@ import {
   deleteCategoriesById,
   getSubCategoryById,
   insertSubCategory,
+  getSubCategories2,
+  getSubCategoryById2,
+  insertSubCategory2,
 } from '../models/categoryModel.js';
 
 // Get All Products
@@ -52,6 +55,26 @@ export const showSubCategoryById = (req, res) => {
   });
 };
 
+export const showSubCategory2 = (req, res) => {
+  getSubCategories2((err, results) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(results);
+    }
+  });
+};
+
+export const showSubCategoryById2 = (req, res) => {
+  getSubCategoryById2(req.params.id, (err, results) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(results);
+    }
+  });
+};
+
 // Create New Product
 export const createCategory = (req, res) => {
   const data = req.body;
@@ -69,6 +92,18 @@ export const createSubCategory = (req, res) => {
   const data = req.body;
 
   insertSubCategory(data, (err, results) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(results);
+    }
+  });
+};
+
+export const createSubCategory2 = (req, res) => {
+  const data = req.body;
+
+  insertSubCategory2(data, (err, results) => {
     if (err) {
       res.send(err);
     } else {
