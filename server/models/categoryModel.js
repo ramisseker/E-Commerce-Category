@@ -22,7 +22,7 @@ export const getCategoryById = (id, result) => {
   });
 };
 
-export const getSubCategories = (id, result) => {
+export const getSubCategories = (result) => {
   db.query('SELECT * FROM subcategories', (err, results) => {
     if (err) {
       console.log(err);
@@ -34,14 +34,18 @@ export const getSubCategories = (id, result) => {
 };
 
 export const getSubCategoryById = (id, result) => {
-  db.query('SELECT * FROM subcategories WHERE id = ?', [id], (err, results) => {
-    if (err) {
-      console.log(err);
-      result(err, null);
-    } else {
-      result(null, results[0]);
+  db.query(
+    'SELECT * FROM subcategories WHERE category_id = ?',
+    [id],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        result(err, null);
+      } else {
+        result(null, results);
+      }
     }
-  });
+  );
 };
 
 export const insertCategory = (data, result) => {
@@ -53,6 +57,21 @@ export const insertCategory = (data, result) => {
       result(null, results);
     }
   });
+};
+
+export const insertSubCategory = (data, result) => {
+  db.query(
+    'INSERT INTO subcategories (subcatname, category_id) VALUES (?,?)',
+    [data.subcatname, data.category_id],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        result(err, null);
+      } else {
+        result(null, results);
+      }
+    }
+  );
 };
 
 export const editCategoriesById = (data, id, result) => {

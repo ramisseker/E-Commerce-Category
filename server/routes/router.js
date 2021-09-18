@@ -6,10 +6,12 @@ import db from '../config/database.js';
 import { validateRegister, isLoggedIn } from '../middleware/users.js';
 import {
   createCategory,
+  createSubCategory,
   deleteCategory,
   showCategory,
   showCategoryById,
   showSubCategory,
+  showSubCategoryById,
   updateCategory,
 } from '../controllers/categories.js';
 
@@ -124,7 +126,11 @@ router.get('/subcategories', showSubCategory);
 
 router.get('/categories/:id', showCategoryById);
 
+router.get('/subcategories/:id', showSubCategoryById);
+
 router.post('/categories', createCategory);
+
+router.post('/subcategories', createSubCategory);
 
 router.put('/categories/:id', updateCategory);
 

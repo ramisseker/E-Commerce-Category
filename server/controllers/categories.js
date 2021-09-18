@@ -7,6 +7,7 @@ import {
   editCategoriesById,
   deleteCategoriesById,
   getSubCategoryById,
+  insertSubCategory,
 } from '../models/categoryModel.js';
 
 // Get All Products
@@ -54,7 +55,20 @@ export const showSubCategoryById = (req, res) => {
 // Create New Product
 export const createCategory = (req, res) => {
   const data = req.body;
+
   insertCategory(data, (err, results) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(results);
+    }
+  });
+};
+
+export const createSubCategory = (req, res) => {
+  const data = req.body;
+
+  insertSubCategory(data, (err, results) => {
     if (err) {
       res.send(err);
     } else {
