@@ -39,114 +39,10 @@
               @click="
                 subCategoriesById(item.id);
                 getCategoriesById(item.id);
+                clickShow();
               "
             >
               {{ item.category_name }}
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-    <section class="column">
-      <div>
-        <div class="columns is-justify-content-space-between m-2">
-          <div>
-            <h1>SubCategories</h1>
-          </div>
-          <div>
-            <input
-              class="mr-3"
-              type="text"
-              placeholder="Sub Category Name"
-              v-model="subCategoryName"
-            />
-            <button
-              class="button is-warning is-small"
-              @click="updateSubCategory(subItems[0].id)"
-            >
-              Edit
-            </button>
-            <button
-              class="button is-danger is-small"
-              @click="deleteSubCategory(subItems[0].id)"
-            >
-              Delete
-            </button>
-            <button
-              class="button is-info is-small"
-              @click="saveSubCategory(category.id)"
-            >
-              Add
-            </button>
-          </div>
-        </div>
-        <div class="categories">
-          <ul>
-            <li
-              class="listitems is-12"
-              v-for="item in subItems"
-              :key="item.id"
-              @click="subCategoriesById2(item.id)"
-            >
-              {{ item.subcatname }}
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="column">
-      <div>
-        <div class="columns is-justify-content-space-between m-2">
-          <div>
-            <h1>Categories</h1>
-          </div>
-          <div>
-            <input
-              class="mr-3"
-              type="text"
-              placeholder="Sub Category Name"
-              v-model="subCategoryName2"
-            />
-            <button>Edit</button>
-            <button>Delete</button>
-            <button v-on:click="saveSubCategory2">Add</button>
-          </div>
-        </div>
-        <div class="categories">
-          <ul id="example-1">
-            <li
-              class="listitems is-12"
-              v-for="item in subItems2"
-              :key="item.id"
-            >
-              {{ item.subcatname2 }}
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-    <section class="column">
-      <div>
-        <div class="columns is-justify-content-space-between m-2">
-          <div>
-            <h1>Categories</h1>
-          </div>
-          <div>
-            <button>Edit</button>
-            <button>Delete</button>
-            <button>Add</button>
-          </div>
-        </div>
-        <div class="categories">
-          <ul id="example-1">
-            <li
-              class="listitems is-12"
-              v-for="item in items"
-              :key="item.message"
-              @click="basildi"
-            >
-              {{ item.message }}
             </li>
           </ul>
         </div>
@@ -172,7 +68,10 @@ export default {
       subItems2: [],
       itemId: '0',
       category: { category_name: ' Category' },
-      disabled: 0,
+      show: false,
+      clickStyle: {
+        background: '#b8e3ef',
+      },
     };
   },
 
@@ -323,7 +222,9 @@ export default {
     basildi() {
       alert('basıldı...');
     },
-    visibility() {},
+    clickShow() {
+      this.show = !this.show;
+    },
   },
 };
 </script>

@@ -2,30 +2,23 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import App from './App.vue';
-// import Create from './components/AddProduct.vue';
-// import Edit from './components/EditProduct.vue';
 import Index from './components/CategoryList.vue';
-// import CategoryTree from './components/CategoryTree.vue';
+import Index2 from './components/CategoryList2.vue';
 
 Vue.use(VueRouter);
 
 Vue.config.productionTip = false;
 
 const routes = [
-  // {
-  //   name: 'Create',
-  //   path: '/create',
-  //   component: Create,
-  // },
-  // {
-  //   name: 'Edit',
-  //   path: '/edit/:id',
-  //   component: Edit,
-  // },
   {
     name: 'Index',
     path: '/',
     component: Index,
+  },
+  {
+    name: 'Index2',
+    path: '/Index2',
+    component: Index2,
   },
 ];
 

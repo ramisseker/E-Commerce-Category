@@ -101,8 +101,6 @@ export const insertSubCategory = (data, result) => {
 };
 
 export const insertSubCategory2 = (data, result) => {
-  console.log('data');
-  console.log(data);
   db.query(
     'INSERT INTO subcategories2 (subcatname2, subcat_id) VALUES (?,?)',
     [data.subcatname2, data.subcat_id],
@@ -119,8 +117,23 @@ export const insertSubCategory2 = (data, result) => {
 
 export const editCategoriesById = (data, id, result) => {
   db.query(
-    'UPDATE categories SET product_name = ? WHERE id = ?',
-    [data.product_name, id],
+    'UPDATE categories SET category_name = ? WHERE id = ?',
+    [data.category_name, id],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        result(err, null);
+      } else {
+        result(null, results);
+      }
+    }
+  );
+};
+
+export const editSubCategoriesById = (data, id, result) => {
+  db.query(
+    'UPDATE subcategories SET category_name = ? WHERE id = ?',
+    [data.category_name, id],
     (err, results) => {
       if (err) {
         console.log(err);
@@ -134,6 +147,17 @@ export const editCategoriesById = (data, id, result) => {
 
 export const deleteCategoriesById = (id, result) => {
   db.query('DELETE FROM categories WHERE id = ?', [id], (err, results) => {
+    if (err) {
+      console.log(err);
+      result(err, null);
+    } else {
+      result(null, results);
+    }
+  });
+};
+
+export const deleteSubCategoriesById = (id, result) => {
+  db.query('DELETE FROM subcategories WHERE id = ?', [id], (err, results) => {
     if (err) {
       console.log(err);
       result(err, null);

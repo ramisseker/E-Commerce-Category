@@ -16,6 +16,8 @@ import {
   showSubCategory2,
   showSubCategoryById2,
   createSubCategory2,
+  deleteSubCategory,
+  updateSubCategory,
 } from '../controllers/categories.js';
 
 const router = express.Router();
@@ -120,7 +122,7 @@ router.post('/login', (req, res, next) => {
 });
 router.get('/secret-route', isLoggedIn, (req, res, next) => {
   console.log(req.userData);
-  res.send('This is the secret content. Only logged in users can see that!');
+  res.send('Only logged in users can see');
 });
 
 router.get('/categories', showCategory);
@@ -143,6 +145,10 @@ router.post('/subcategories2', createSubCategory2);
 
 router.put('/categories/:id', updateCategory);
 
+router.put('/categories/:id', updateSubCategory);
+
 router.delete('/categories/:id', deleteCategory);
+
+router.delete('/subcategories/:id', deleteSubCategory);
 
 export default router;

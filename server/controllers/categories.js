@@ -1,19 +1,19 @@
-// Import function from Product Model
 import {
   getCategory,
   getCategoryById,
   getSubCategories,
   insertCategory,
   editCategoriesById,
+  editSubCategoriesById,
   deleteCategoriesById,
   getSubCategoryById,
   insertSubCategory,
   getSubCategories2,
   getSubCategoryById2,
   insertSubCategory2,
+  deleteSubCategoriesById,
 } from '../models/categoryModel.js';
 
-// Get All Products
 export const showCategory = (req, res) => {
   getCategory((err, results) => {
     if (err) {
@@ -24,7 +24,6 @@ export const showCategory = (req, res) => {
   });
 };
 
-// Get Single Product
 export const showCategoryById = (req, res) => {
   getCategoryById(req.params.id, (err, results) => {
     if (err) {
@@ -75,7 +74,6 @@ export const showSubCategoryById2 = (req, res) => {
   });
 };
 
-// Create New Product
 export const createCategory = (req, res) => {
   const data = req.body;
 
@@ -112,10 +110,10 @@ export const createSubCategory2 = (req, res) => {
   });
 };
 
-// Update Product
 export const updateCategory = (req, res) => {
   const data = req.body;
   const id = req.params.id;
+
   editCategoriesById(data, id, (err, results) => {
     if (err) {
       res.send(err);
@@ -125,10 +123,33 @@ export const updateCategory = (req, res) => {
   });
 };
 
-// Delete Product
+export const updateSubCategory = (req, res) => {
+  const data = req.body;
+  const id = req.params.id;
+
+  editSubCategoriesById(data, id, (err, results) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(results);
+    }
+  });
+};
+
 export const deleteCategory = (req, res) => {
   const id = req.params.id;
   deleteCategoriesById(id, (err, results) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(results);
+    }
+  });
+};
+
+export const deleteSubCategory = (req, res) => {
+  const id = req.params.id;
+  deleteSubCategoriesById(id, (err, results) => {
     if (err) {
       res.send(err);
     } else {
