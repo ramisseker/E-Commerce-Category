@@ -1,4 +1,4 @@
-# E-Commerence-Category Full Stack Example
+# E-Commerce-Category Full Stack Example
 
 [DEMO URL](https://eloquent-hermann-28965b.netlify.app/)
 
