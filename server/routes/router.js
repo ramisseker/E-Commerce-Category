@@ -6,18 +6,10 @@ import db from '../config/database.js';
 import { validateRegister, isLoggedIn } from '../middleware/users.js';
 import {
   createCategory,
-  createSubCategory,
   deleteCategory,
   showCategory,
   showCategoryById,
-  showSubCategory,
-  showSubCategoryById,
   updateCategory,
-  showSubCategory2,
-  showSubCategoryById2,
-  createSubCategory2,
-  deleteSubCategory,
-  updateSubCategory,
 } from '../controllers/categories.js';
 
 const router = express.Router();
@@ -125,30 +117,14 @@ router.get('/secret-route', isLoggedIn, (req, res, next) => {
   res.send('Only logged in users can see');
 });
 
-router.get('/categories', showCategory);
+router.get('/category', showCategory);
 
-router.get('/subcategories', showSubCategory);
+router.get('/category/:id', showCategoryById);
 
-router.get('/subcategories2', showSubCategory2);
+router.post('/category', createCategory);
 
-router.get('/categories/:id', showCategoryById);
+router.put('/category/:id', updateCategory);
 
-router.get('/subcategories/:id', showSubCategoryById);
-
-router.get('/subcategories2/:id', showSubCategoryById2);
-
-router.post('/categories', createCategory);
-
-router.post('/subcategories', createSubCategory);
-
-router.post('/subcategories2', createSubCategory2);
-
-router.put('/categories/:id', updateCategory);
-
-router.put('/categories/:id', updateSubCategory);
-
-router.delete('/categories/:id', deleteCategory);
-
-router.delete('/subcategories/:id', deleteSubCategory);
+router.delete('/category/:id', deleteCategory);
 
 export default router;
