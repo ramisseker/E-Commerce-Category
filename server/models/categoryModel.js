@@ -30,7 +30,6 @@ export const getCategoryById = (id, result) => {
 };
 
 export const insertCategory = (data, result) => {
-  console.log(data);
   db.query(
     'INSERT INTO category (category_name, category_id) VALUES(?,?)',
     [data.category_name, data.category_id],

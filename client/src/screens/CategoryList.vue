@@ -8,8 +8,7 @@
       :items="items[index]"
       :categoryId="categoryIdList[index].category_id"
       :boxId="index"
-    ></component
-    >"
+    ></component>
   </div>
 </template>
 <script>
@@ -43,12 +42,11 @@ export default {
       }
     },
     async getCategoryById(id, boxId) {
-      console.log(this.items[boxId + 1]);
       if (this.items[boxId + 1] == undefined) {
         this.items[boxId + 1] = [];
       }
       this.categoryIdList.push({ boxId: boxId, category_id: id });
-      console.log(id, boxId);
+
       if (this.categoryIdList.filter((x) => x.boxId == boxId).length > 0) {
         const a = this.categoryIdList.findIndex((a) => a.boxId == boxId);
         this.categoryIdList[a] = {
@@ -58,11 +56,11 @@ export default {
       } else {
         this.categoryIdList.push({ boxId: boxId, category_id: id });
       }
+
       try {
         const response = await axios.get(
           `http://localhost:3000/api/category/${id}`
         );
-        console.log(response.data);
         if (this.components.length == boxId + 1) {
           this.components.push(Category);
         }
@@ -71,7 +69,6 @@ export default {
       } catch (err) {
         console.log(err);
       }
-      console.log('items', this.items);
     },
   },
 };

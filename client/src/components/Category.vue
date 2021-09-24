@@ -30,10 +30,7 @@
           </button>
         </div>
       </div>
-      <div
-        :class="{ classA: scrollPosition < 100, classB: scrollPosition > 100 }"
-        class="categories"
-      >
+      <div class="categories">
         <ul>
           <li
             class="listitems is-12"
@@ -66,8 +63,12 @@ export default {
   },
 
   methods: {
+    clickId(id, boxId) {
+      console.log('this.categoryId', this.categoryId);
+      this.itemId = id;
+      this.$emit('Clicked', id, boxId);
+    },
     async saveCategory(id) {
-      console.log('id :', id);
       try {
         await axios.post('http://localhost:3000/api/category/', {
           category_name: this.categoryName,
@@ -92,8 +93,6 @@ export default {
       }
     },
     async deleteCategory() {
-      console.log('id');
-      console.log('id ', this.itemId);
       try {
         await axios.delete(`http://localhost:3000/api/category/${this.itemId}`);
         this.$router.go('/');
@@ -101,16 +100,6 @@ export default {
         console.log(err);
       }
     },
-    clickId(id, boxId) {
-      this.itemId = id;
-      this.$emit('Clicked', id, boxId);
-    },
-    updateScroll() {
-      this.scrollPosition = window.scrollX;
-    },
-  },
-  mounted() {
-    window.addEventListener('scroll', this.updateScroll);
   },
 };
 </script>
